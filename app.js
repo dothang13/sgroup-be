@@ -33,7 +33,9 @@ app.post('/api/users/', (req, res) => {
 });
 
 app.put('/api/users/:id/', (req,res) =>{
-    
+    const updatedItem = req.body;
+    writeData(updatedItem);
+    res.send(updatedItem);
 });
 
 app.delete("/api/users/:id/", (req, res) => {
