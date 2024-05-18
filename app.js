@@ -1,23 +1,106 @@
 var express = require('express');
+const bodyParser = require("body-parser");
+const fs = require("fs");
 var app = express();
-app.post('/', (req, res) => {
-  res.status(201).send('User added successfully');
+
+const users = require("./users.json");
+
+app.use(bodyParser.json());
+const writeData = (data) => {
+  fs.writeFileSync("users.json", JSON.stringify(data, null, 2));
+};
+
+// app.post('/', (req, res) => {
+//   res.status(201).send('User added successfully');
+// });
+app.get('/api/users/', function (req, res) {
+  const data = require("./users.json");
+  res.send(data);
 });
-app.get('/', function (req, res) {
-  res.send('Hello World!');
+app.get('/api/users/:id/', (req, res) => {
+    const usersId = parseInt(req.params.id);
+    const users = users.find((users) =>  users.id === usersId);
+    res.send(users.filter(users));
 });
-app.put('/', function (req, res) {
-  res.send('User putted successfully');
+
+app.post('/api/users/', (req, res) => {
+    const newItem = req.body;
+    newItem.id = users.length ? users[users.length - 1].id + 1 : 1;
+    console.log(users);
+    users.push(newItem);
+    res.status(201).send(users);
+    writeData(users);
 });
-app.delete('/', function (req, res) {
-  res.send('User deleted successfully');
+
+app.put('/api/users/:id/', (req,res) =>{
+    
 });
+
+app.delete("/api/users/:id/", (req, res) => {
+  const emptyObject = {};
+  writeData(emptyObject);
+  res.send({ message: "Item deleted" });
+});
+
 app.listen(3000, function () {
-  console.log('Server đã bắt đầu lắng nghe trên cổng 3000.');
+  console.log('Example app listening on http://localhost:3000/');
 });
 
 
 
+
+
+// app.put("/", (req, res) => {
+//   const updatedItem = req.body;
+//   writeData(updatedItem);
+//   res.send(updatedItem);
+// });
+// app.patch('/', function (req, res) {
+//   res.send('User patched successfully');
+// });
+// app.delete('/', function (req, res) {
+//   res.send('User deleted successfully');
+// });
+
+
+
+
+
+
+
+
+// var express = require("express");
+// const bodyParser = require("body-parser");
+// const fs = require("fs");
+// var app = express();
+// var port = 3000;
+
+// app.use(bodyParser.json());
+// const writeData = (data) => {
+//   fs.writeFileSync("users.json", JSON.stringify(data, null, 2));
+// };
+// app.get("/", function (req, res) {
+//   const data = require("./users.json");
+//   res.send(data);
+// });
+// app.post("/", (req, res) => {
+//   const newItem = req.body;
+//   writeData(newItem);
+//   res.status(201).send(newItem);
+// });
+// app.put("/item", (req, res) => {
+//   const updatedItem = req.body;
+//   writeData(updatedItem);
+//   res.send(updatedItem);
+// });
+// app.delete("/items", (req, res) => {
+//   const emptyObject = {};
+//   writeData(emptyObject);
+//   res.send({ message: "Item deleted" });
+// });
+// app.listen(3000, function () {
+//   console.log("Example app listening on http://localhost:3000/");
+// });
 
 
 

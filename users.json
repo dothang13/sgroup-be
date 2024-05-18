@@ -1,7 +1,6 @@
-[
-    {
-        "id": 1,
-        "name": "Thang",
-        "age": 19
-    }
-]
+{
+    "id": 1,
+    "name": "Thang",
+    "age": 19,
+    "year": 2005
+}
