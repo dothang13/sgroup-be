@@ -1,11 +1,5 @@
 [
   {
-    "name": "Thang2",
-    "age": 18,
-    "year": 2009,
-    "id": 1
-  },
-  {
     "id": 2,
     "name": "Thang",
     "age": 20,
@@ -22,5 +16,12 @@
     "age": 18,
     "year": 2004,
     "id": 4
+  },
+  {
+    "age": 19,
+    "name": "Su",
+    "email": "endiezzhang@gamil.com",
+    "year": 2006,
+    "id": 5
   }
 ]
