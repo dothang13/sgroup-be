@@ -1,8 +1,13 @@
 {
   "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
     "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
     "mysql": "^2.18.1",
-    "mysql2": "^3.10.1"
+    "mysql2": "^3.10.1",
+    "nodemailer": "^6.9.14"
   },
   "name": "s_be",
   "version": "1.0.0",
@@ -12,7 +17,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./app.js localhost 3000"
+    "start": "nodemon ./src/upload-express/server.js"
   },
   "author": "",
   "license": "ISC",

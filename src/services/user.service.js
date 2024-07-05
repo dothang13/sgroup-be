@@ -1,4 +1,4 @@
-const conn = require("../config/database");
+const conn = require("../configs/database");
 
 const getAllUsers = async () => {
     const result = await conn.query("SELECT * FROM users");
