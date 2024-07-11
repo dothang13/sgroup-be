@@ -8,7 +8,7 @@ const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '123@Thang',
-    database: 'SGr'
+    database: 'SGrvote'
 });
 
 app.use(bodyParser.urlencoded({ extended: false }));
