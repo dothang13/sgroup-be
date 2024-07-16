@@ -61,8 +61,30 @@ const updateVote = async (req, res) => {
     }
 };
 
+const getVote = async (req, res) => {
+    const { PollID } = req.params;
+    try {
+        const [votes] = await db.query(
+            'SELECT OptionID, COUNT(UserID) as voteCount FROM Submition WHERE OptionID IN (SELECT OptionID FROM Opts WHERE PollID = ?) GROUP BY OptionID',
+            [PollID]
+        );
+        
+        return res.status(200).json({
+            message: 'Votes retrieved successfully',
+            votes: votes
+        });
+    } catch (error) {
+        console.log('Get votes failed', error);
+        return res.status(500).json({
+            message: 'Error',
+            error: error.message,
+        });
+    }
+};
+
 module.exports = {
     createOption,
     deleteOption,
-    updateVote
+    updateVote,
+    getVote
 };
